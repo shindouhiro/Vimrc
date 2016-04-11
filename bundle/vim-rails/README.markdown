@@ -9,14 +9,15 @@ features:
   context and knows about partials, fixtures, and much more.  There are
   two commands, `:A` (alternate) and `:R` (related) for easy jumping
   between files, including favorites like model to schema, template to
-  helper, and controller to functional test.  For more advanced usage,
-  `:Rmodel`, `:Rview`, `:Rcontroller`, and several other commands are
-  provided.  `:help rails-navigation`
+  helper, and controller to functional test.  Commands like `:Emodel`,
+  `:Eview`, `:Econtroller`, are provided to `:edit` files by type, along
+  with `S`, `V`, and `T` variants for `:split`, `:vsplit`, and
+  `:tabedit`.  Throw a bang on the end (`:Emodel foo!`) to automatically
+  create the file with the standard boilerplate if it doesn't exist.
+  `:help rails-navigation`
 
 * Enhanced syntax highlighting.  From `has_and_belongs_to_many` to
-  `distance_of_time_in_words`, it's here.  For easy completion of these
-  long method names, `'completefunc'` is set to enable syntax based
-  completion on CTRL-X CTRL-U.
+  `distance_of_time_in_words`, it's here.
 
 * Interface to rake.  Use `:Rake` to run the current test, spec, or
   feature.  Use `:.Rake` to do a focused run of just the method,
@@ -25,10 +26,10 @@ features:
   `:help rails-rake`
 
 * Interface to the `rails` command.  Generally, use `:Rails console` to
-  call `rails console` or `script/console`.  Most commands have wrappers
-  with additional features: `:Rgenerate controller Blog` generates a
-  blog controller and edits `app/controllers/blog_controller.rb`.
-  `:help rails-scripts`
+  call `rails console`.  Many commands have wrappers with additional features:
+  `:Rgenerate controller Blog` generates a blog controller and loads the
+  generated files into the quickfix list, and `:Rrunner` wraps `rails runner`
+  and doubles as a direct test runner.  `:help rails-scripts`
 
 * Partial and concern extraction.  In a view, `:Rextract {file}`
   replaces the desired range (typically selected in visual line mode)
@@ -37,8 +38,12 @@ features:
   appropriate `include` declaration left behind.
   `:help rails-:Rextract`
 
-* Integration with other plugins.  `:Rtree` spawns
-  [NERDTree.vim](https://github.com/scrooloose/nerdtree).  If
+* Fully customizable. Define "projections" at the global, app, or gem
+  level to define navigation commands and override the alternate file,
+  default rake task, syntax highlighting, abbreviations, and more.
+  `:help rails-projections`.
+
+* Integration with other plugins.  If
   [dbext.vim](http://www.vim.org/scripts/script.php?script_id=356) is
   installed, it will be transparently configured to reflect
   `database.yml`.  Users of
@@ -56,7 +61,6 @@ then simply copy and paste:
     cd ~/.vim/bundle
     git clone git://github.com/tpope/vim-rails.git
     git clone git://github.com/tpope/vim-bundler.git
-
 
 You don't strictly need [bundler.vim][], but it helps.
 
@@ -92,27 +96,14 @@ Rails application.
 
 > What Rails versions are supported?
 
-All of them.  A few features like syntax highlighting tend to reflect the
-latest version only.
+All of them, although you may notice a few minor breakages if you dip below
+3.0.  A few features like syntax highlighting tend to reflect the latest
+version only.
 
-> Rake is slow.  How about making `:Rake` run
-> `testrb`/`rspec`/`cucumber` directly instead of `rake`?
+> Didn't rails.vim used to handle indent settings?
 
-Well then it wouldn't make sense to call it `:Rake`, now, would it?
-Maybe one day I'll add a separate `:Run` command or something.  In the
-meantime, here's how you can set up `:make` to run the current test:
-
-    autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
-    autocmd FileType ruby
-          \ if expand('%') =~# '_test\.rb$' |
-          \   compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
-          \ elseif expand('%') =~# '_spec\.rb$' |
-          \   compiler rspec | setl makeprg=rspec\ \"%:p\" |
-          \ else |
-          \   compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
-          \ endif
-    autocmd User Bundler
-          \ if &makeprg !~# 'bundle' | setl makeprg^=bundle\ exec\  | endif
+It got yanked after increasing contention over JavaScript.  Check out
+[sleuth.vim](https://github.com/tpope/vim-sleuth).
 
 ## Self-Promotion
 
