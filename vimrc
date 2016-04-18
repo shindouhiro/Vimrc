@@ -1,6 +1,6 @@
 " 
 "定义快捷键的前缀，即<Leader>
-let mapleader=","
+let mapleader=";"
 
 " 定义快捷键到行首和行尾
 nmap LB 0
@@ -14,7 +14,7 @@ nmap <Leader>q :q<CR>
 " 定义快捷键保存当前窗口内容
 nmap <Leader>w :w<CR>
 " 定义快捷键保存所有窗口内容并退出 vim
-nmap <Leader>WQ :wa<CR>:q<CR>
+nmap <Leader>wq :wa<CR>:q<CR>
 " 不做任何保存，直接退出 vim
 nmap <Leader>Q :qa!<CR>
 " 依次遍历子窗口
@@ -72,6 +72,9 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/nerdtree'
 Plugin 'honza/vim-snippets'
+Plugin 'ap/vim-css-color'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'mattn/emmet-vim'
 " 插件列表结束
 call vundle#end()
 filetype plugin indent on
@@ -127,3 +130,20 @@ set softtabstop=4
 let g:ctrlp_map = ',,' 
 " NERDTree
 nmap <F2> :NERDTree  <CR> 
+" 注释
+map <c-c> gcc
+" 快速移动
+nnoremap ∆ :m .+1<CR>==
+nnoremap ˚ :m .-2<CR>==
+inoremap ∆ <Esc>:m .+1<CR>==gi
+inoremap ˚ <Esc>:m .-2<CR>==gi
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
+
+" 设置 gvim 显示字体
+set guifont=YaHei\ Consolas\ Hybrid\ 11.5
+" 禁止折行
+set nowrap
+" 设置状态栏主题风格
+let g:Powerline_colorscheme='solarized256'
+" let g:user_emmet_leader_key='<C-Z>'
