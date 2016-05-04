@@ -75,6 +75,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'ap/vim-css-color'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'mattn/emmet-vim'
+Plugin 'Valloric/YouCompleteMe'
 " 插件列表结束
 call vundle#end()
 filetype plugin indent on
@@ -121,11 +122,11 @@ filetype indent on
 " " 将制表符扩展为空格
 set expandtab
 " " 设置编辑时制表符占用空格数
-set tabstop=4
+set tabstop=2
 " " 设置格式化时制表符占用空格数
-set shiftwidth=4
+set shiftwidth=2
 " " 让 vim 把连续数量的空格视为一个制表符
-set softtabstop=4
+set softtabstop=2
 " ctrlp
 let g:ctrlp_map = ',,' 
 " NERDTree
@@ -147,3 +148,9 @@ set nowrap
 " 设置状态栏主题风格
 let g:Powerline_colorscheme='solarized256'
 " let g:user_emmet_leader_key='<C-Z>'
+" 设置Complete
+" let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+ let g:ycm_key_list_select_completion = ['<Down>']
+" esc 映射jj
+imap jj <esc>
+imap <Tab> <C-P>
